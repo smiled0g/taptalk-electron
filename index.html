@@ -14,7 +14,16 @@
       <div class="main">
         <h1>Welcome back, Kasi</h1>
         <h3>Start talking with your friends by pressing the button!</h3>
-        <button class="online-status">GO OFFLINE</button>
+        <div class="online-status">
+          <div class="slideswitch">
+            <input type="checkbox" name="slideswitch" class="slideswitch-checkbox"
+              id="online-switch" ng-model="isOnline" ng-change="fn.toggleStatus()">
+            <label class="slideswitch-label" for="online-switch">
+                <span class="slideswitch-inner"></span>
+                <span class="slideswitch-switch"></span>
+            </label>
+          </div>
+        </div>
         <ul class="friend-list">
           <li class="friend-item">
             <div class="avatar-key">

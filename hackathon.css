@@ -58,10 +58,7 @@ button:focus {
   font-size: 18px;
 }
 
-.main button.online-status {
-  background: #f88989;
-  color: #fff;
-  width: 180px;
+.main .online-status {
   margin: 40px 0 30px;
 }
 
@@ -247,4 +244,65 @@ button {
   border: 0;
   border-radius: 5px;
   font-size: 12px;
+}
+
+/* Slideswitch */
+
+.slideswitch {
+    position: relative; width: 180px;
+    -webkit-user-select:none;
+}
+.slideswitch-checkbox {
+    display: none;
+}
+.slideswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #FFA3A3;
+    border-radius: 7px;
+}
+.slideswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.slideswitch-inner:before, .slideswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 38px;
+    padding: 0;
+    line-height: 38px;
+    font-size: 16px;
+    color: white;
+    font-weight: 500;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.slideswitch-inner:before {
+    content: "You're online";
+    padding-left: 8px;
+    background-color: #FFA3A3; color: #FFFFFF;
+}
+.slideswitch-inner:after {
+    content: "You're offline";
+    padding-right: 8px;
+    background-color: rgba(255, 163, 163, 0.05); 
+    color: #999999;
+    text-align: right;
+}
+.slideswitch-switch {
+    display: block; width: 22px; height: 22px; margin: 3px;
+    background: #FFFFFF;
+    border: 2px solid #FFA3A3; border-radius: 7px;
+    position: absolute; top: 6px; bottom: 0; right: 142px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+}
+.slideswitch-checkbox:checked + .slideswitch-label .slideswitch-inner {
+    margin-left: 0;
+}
+.slideswitch-checkbox:checked + .slideswitch-label .slideswitch-switch {
+    right: 8px;
 }
