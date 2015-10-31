@@ -1,0 +1,9 @@
+{
+  "name": "taptalk-electron",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "electron-prebuilt": "^0.33.7",
+    "electron-rebuild": "^1.0.1"
+  }
+}

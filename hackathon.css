@@ -1,0 +1,250 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, ul {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.page-container {
+  display: flex;
+  height: 100%;
+  font-family: 'Open Sans';
+  color: #666;
+}
+
+/* Left */
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.main {
+  flex: initial;
+  padding: 0 20px 0 70px;
+}
+
+.main h1 {
+  font-weight: normal;
+  line-height: 50px;
+}
+
+.main h3 {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.main button.online-status {
+  background: #f88989;
+  color: #fff;
+  width: 180px;
+  margin: 40px 0 30px;
+}
+
+.main .friend-item .avatar-key {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  height: 64px;
+}
+
+.main .friend-item {
+  display: inline-block;
+  padding: 15px 20px 5px 20px;
+  border-radius: 5px;
+}
+
+.main .friend-item:hover {
+  background: #fafafa;
+}
+
+.main .friend-item .name {
+  display: inline-block;
+  line-height: 50px;
+  height: 50px;
+  margin-left: 50px;
+  vertical-align: top;
+}
+
+.main .friend-item .avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+}
+
+.main .friend-item .key {
+  width: 24px;
+  height: 22px;
+  background: #e8e8e8;
+  border-bottom: solid 4px #d5d5d5;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 18px;
+  position: absolute;
+  bottom: 0;
+  left: 13px;
+}
+
+.main .key:hover {
+  bottom: -4px;
+  height: 18px;
+  border-bottom: 0;
+}
+
+/* Right */
+
+.sidebar {
+  flex: initial;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background: #f7f7f5;
+  padding: 20px 25px;
+}
+
+.sidebar .search-container {
+  position: relative;
+  width: 100%;
+  flex: initial;
+  height: 35px;
+}
+
+.sidebar .search-container input{
+  border: solid 1px #ddd;
+  color: #666;
+  font-size: 13px;
+  padding: 7px 5px 9px 35px;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.sidebar .search-container:before {
+  content: "\f4a5";
+  font-family: "Ionicons";
+  position: absolute;
+  font-size: 18px;
+  top: 7px;
+  left: 12px;
+  color: #ddd;
+}
+
+.sidebar .friend-list {
+  overflow: auto;
+  flex: 1;
+  padding: 20px;
+}
+
+.sidebar ul.friend-status-group {
+  margin-bottom: 20px;
+}
+
+.sidebar ul.friend-status-group h3 {
+  font-size: 12px;
+  margin-bottom: 15px;
+  color: #ccc;
+  text-transform: uppercase;
+}
+
+.sidebar ul.friend-status-group li {
+  font-size: 13px;
+  padding-left: 35px;
+  position: relative;
+  margin-bottom: 7px;
+}
+
+.sidebar ul.friend-status-group li:before {
+  height: 14px;
+  width: 14px;
+  content: " ";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  border-radius: 3px;
+  background: #ccc;
+}
+
+.sidebar ul.friend-status-group.online li:before {
+  background: #C7EFCF;
+}
+
+.sidebar ul.friend-status-group.offline li:before {
+  background: #D6D1B1;
+}
+
+.sidebar ul.friend-status-group.incoming li:before {
+  background: #F0B67F
+}
+
+.sidebar ul.friend-status-group li i.ion {
+  width: 24px;
+  height: 22px;
+  background: #e8e8e8;
+  border-bottom: solid 4px #d5d5d5;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  position: relative;
+  float: right;
+  margin-left: 3px;
+  bottom: 0;
+  left: 13px;
+}
+
+.sidebar ul.friend-status-group li i.ion:hover {
+  border-bottom: 0 !important;
+  bottom: -4px;
+  height: 18px;
+}
+
+.sidebar ul.friend-status-group li i.ion.accept {
+  background: #70C1B3;
+  border-bottom: solid 4px #60a69a;
+  color: #fff;
+}
+
+.sidebar ul.friend-status-group li i.ion.decline {
+  background: #F25F5C;
+  border-bottom: solid 4px #d0504d;
+  color: #fff;
+}
+
+/* Utilities */
+
+button {
+  padding: 10px 20px;
+  text-align: center;
+  border: 0;
+  border-radius: 5px;
+  font-size: 12px;
+}

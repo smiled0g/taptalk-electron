@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Joyyak</title>
+  <link type="text/css" href="hackathon.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div class="page-container">
+    <div class="main-container">
+      <div class="spacer"></div>
+      <div class="main">
+        <h1>Welcome back, Kasi</h1>
+        <h3>Start talking with your friends by pressing the button!</h3>
+        <button class="online-status">GO OFFLINE</button>
+        <ul class="friend-list">
+          <li class="friend-item">
+            <div class="avatar-key">
+              <div class="avatar" style="background-image: url('images/swit.jpg')"></div>
+              <div class="key">A</div>
+            </div>
+            <div class="name">Sorawit Suriyakarn</div>
+          </li>
+          <li class="friend-item">
+            <div class="avatar-key">
+              <div class="avatar" style="background-image: url('images/minions.jpg')"></div>
+              <div class="key">S</div>
+            </div>
+            <div class="name">Minions</div>
+          </li>
+          <li class="friend-item">
+            <div class="avatar-key">
+              <div class="avatar" style="background-image: url('images/grumpy_cat.jpg')"></div>
+              <div class="key">D</div>
+            </div>
+            <div class="name">Grumpy Cat</div>
+          </li>
+        </ul>
+      </div>
+      <div class="spacer"></div>
+
+    </div>
+    <nav class="sidebar">
+      <div class="search-container">
+        <input type="text" placeholder="Search friends"/>
+      </div>
+      <div class="friend-list">
+        <ul class="friend-status-group online">
+          <h3>Online</h3>
+          <li class="friend-item">
+            Gott Phusit
+          </li>
+          <li class="friend-item">
+            Gitt Phusot
+          </li>
+        </ul>
+        <ul class="friend-status-group offline">
+          <h3>Offline</h3>
+          <li class="friend-item">
+            Gitt Phusot
+          </li>
+          <li class="friend-item">
+            Gott Phusit
+          </li>
+        </ul>
+        <ul class="friend-status-group incoming">
+          <h3>Ongoing Request</h3>
+          <li class="friend-item">
+            Gott Phusit
+          </li>
+          <li class="friend-item">
+            Gott Phusit
+          </li>
+        </ul>
+        <ul class="friend-status-group incoming">
+          <h3>Incoming Request</h3>
+          <li class="friend-item">
+            Gott Phusit
+            <i class="ion decline ion-android-close"></i>
+            <i class="ion accept ion-android-done"></i>
+          </li>
+          <li class="friend-item">
+            Gott Phusit
+            <i class="ion decline ion-android-close"></i>
+            <i class="ion accept ion-android-done"></i>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    // Scale-up for demo in Retina display
+    require('web-frame').setZoomFactor(1.10);
+  </script>
+</body>
+</html>
