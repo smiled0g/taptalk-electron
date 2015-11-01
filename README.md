@@ -1,4 +1,4 @@
-TapTalk Electron App
+Tiptalk Electron App
 ==========
 An awesome way to talk with your friends!
 
