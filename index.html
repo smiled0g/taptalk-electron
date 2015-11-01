@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TipTalk</title>
+  <title>tiptalk</title>
   <link type="text/css" href="hackathon.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
   <link href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet' type='text/css'>
@@ -44,8 +44,8 @@
     <div class="main-container">
       <div class="spacer"></div>
       <div class="main">
-        <h1>Welcome back, Kasi</h1>
-        <h3>Start talking with your friends by pressing the button!</h3>
+        <h1 class="welcome-message"></h1>
+        <h3>Start talking with your friends by dragging them to boxes below and press the button!</h3>
         <div class="online-status" onclick="app.ui.updateOnlineStatus()">
           <div class="slideswitch">
             <input type="checkbox" name="slideswitch" class="slideswitch-checkbox"
@@ -59,7 +59,7 @@
         <ul class="friend-list">
           <div class="friend-list-row prominent" id="tutorial-2">
             <a href="#tutorial-3" class="prominent-close" title="Click to close this view">close</a>
-            <li class="friend-item" call-index="1">
+            <li class="friend-item" key-index="1">
               <div class="avatar-key">
                 <div class="avatar" style="background-image: url('images/avatar.png')"></div>
                 <div class="key">A</div>
@@ -133,10 +133,10 @@
         <ul class="friend-status-group callable offline">
           <h3>Offline</h3>
         </ul>
-        <ul class="friend-status-group requested">
+        <ul class="friend-status-group pending">
           <h3>Ongoing Request</h3>
         </ul>
-        <ul class="friend-status-group pending">
+        <ul class="friend-status-group requested">
           <h3>Incoming Request</h3>
         </ul>
       </div>

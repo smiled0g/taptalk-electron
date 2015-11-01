@@ -75,7 +75,7 @@ app.user = {
   },
   sendFriendRequest: function(id) {
     $.postJson(app.getUrl('/friends/request'), { target: id }, function(res){
-      app.ui.updateFriendList();
+      app.socket.updateFriendsOnlineStatus();
     });
   },
   acceptFriendRequest: function(id) {

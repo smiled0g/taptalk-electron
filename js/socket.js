@@ -31,7 +31,12 @@ app.socket = {
         // console.log('get a status');
         // console.log(data);
         $.extend(true, app.session.allFriendsMap[data.id], data);
-        app.ui.updateFriendList();
+        app.socket.updateFriendsOnlineStatus();
+      });
+      socket.on('refresh', function() {
+        app.user.getAllFriends(function(){
+          app.session.socket.emit('query');
+        });
       });
       socket.on('query', function(data) {
         // console.log('get a query result');
@@ -89,7 +94,9 @@ app.socket = {
   },
 
   updateFriendsOnlineStatus: function() {
-    app.session.socket.emit('query');
+    app.user.getAllFriends(function(){
+      app.session.socket.emit('query');
+    });
   },
 
   changeOnlineStatus: function(online) {

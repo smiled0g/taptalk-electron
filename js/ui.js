@@ -67,6 +67,7 @@ app.ui = {
     var username = $('.login-panel [name="username"]').val().trim(),
         password = $('.login-panel [name="password"]').val().trim();
     app.user.login(username, password, function(){
+      $(".welcome-message").html('Welcome back, '+app.session.user.display_name);
       app.ui.initApp();
     });
   },
@@ -75,16 +76,32 @@ app.ui = {
         password = $('.login-panel [name="password"]').val().trim(),
         display_name = $('.login-panel [name="display-name"]').val().trim();
     app.user.register(username, password, display_name, function(){
+      $(".welcome-message").html('Welcome, '+app.session.user.display_name);
       app.ui.initApp();
       window.location.hash = 'tutorial-1';
       app.tutorial.init();
     });
   },
+  transitionLogo: function() {
+    var logoOffset = $('.login-panel .logo').position();
+    $('.login-panel').css({ paddingTop: 130 });
+    $('.login-panel .logo').css({
+      position: 'fixed',
+      top: logoOffset.top,
+      left: logoOffset.left+30
+    }).appendTo('body');
+    $('.logo').animate({
+      top: 110,
+      left: 40,
+      width: 200
+    }, 1000);
+  },
   initApp: function() {
+    app.ui.transitionLogo();
     app.ui.setKeyListeners();
     app.ui.setFriendListDropListeners();
     app.socket.init();
-    app.ui.updateFriendList();
+    app.socket.updateFriendsOnlineStatus();
     app.ui.initFriendSearch();
     $('body').attr('stage', 'app');
     $('.page-container.login-register').css({
@@ -96,12 +113,6 @@ app.ui = {
     setTimeout(function(){
       $('.online-status').click();
     }, 1000);
-  },
-  updateFriendList: function() {
-    app.user.getAllFriends(function() {
-      // app.ui.buildFriendList() will be called automatically via socket.on('query')
-      app.socket.updateFriendsOnlineStatus();
-    });
   },
   buildFriendList: function() {
     // app.session.friends should be available.
@@ -132,16 +143,16 @@ app.ui = {
       .appendTo($('.friend-list.current-friends > ul.offline'));
     });
     // requested
-    $('.friend-list.current-friends > ul.requested').find('li').remove();
-    friendList["requested"].map(function(f) {
+    $('.friend-list.current-friends > ul.pending').find('li').remove();
+    friendList["pending"].map(function(f) {
       $('<li class="friend-item">' +
           f.display_name +
         '</li>')
-      .appendTo($('.friend-list.current-friends > ul.requested'));
+      .appendTo($('.friend-list.current-friends > ul.pending'));
     });
     // requested
-    $('.friend-list.current-friends > ul.pending').find('li').remove();
-    friendList["pending"].map(function(f) {
+    $('.friend-list.current-friends > ul.requested').find('li').remove();
+    friendList["requested"].map(function(f) {
       $('<li class="friend-item">' +
           f.display_name +
           '<button class="decline-request minimal" onclick="app.user.declineFriendRequest('+f.id+')">' +
@@ -151,7 +162,7 @@ app.ui = {
             '<i class="ion ion-android-done"></i>' +
           '</button>' +
         '</li>')
-      .appendTo($('.friend-list.current-friends > ul.pending'));
+      .appendTo($('.friend-list.current-friends > ul.requested'));
     });
 
     app.ui.setFriendListDragListeners();
