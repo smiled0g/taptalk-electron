@@ -22,12 +22,15 @@ app.ui = {
   setKeyListeners: function() {
     $(document).on("keydown", function (e) {
       var key = keys[e.which];
-      if(key && (key.index > 0) && !currentKey) {
-        currentKey = key;
-        app.ui.switchFriendOn(key.index);
-        app.socket.call(
-          app.user.getKeyMap(key.index)
-        );
+      var id = app.user.getKeyMap(key.index);
+      if(id && app.session.allFriendsMap[id].online) {
+        if(key && (key.index > 0) && !currentKey) {
+          currentKey = key;
+          app.ui.switchFriendOn(key.index);
+          app.socket.call(
+            app.user.getKeyMap(key.index)
+          );
+        }
       }
     });
     $(document).on("keyup", function (e) {
@@ -59,6 +62,7 @@ app.ui = {
     app.user.setKeyMap(keyIndex, id);
     $key.find('.avatar').css({ backgroundImage: 'url("'+app.session.allFriendsMap[id].display_img+'")' });
     $key.find('.name').text(app.session.allFriendsMap[id].display_name);
+    app.ui.updateKeyItemStatus();
   },
   showRegister: function() {
     $('.login-panel').addClass('register');
@@ -114,6 +118,20 @@ app.ui = {
       $('.online-status').click();
     }, 1000);
   },
+  updateKeyItemStatus: function() {
+    $('.main .friend-item').each(function(i, item){
+      $(item).removeClass('online').removeClass('offline')
+      var keyIndex = $(item).attr('key-index');
+      var id = app.user.getKeyMap(keyIndex);
+      if(id) {
+        if(app.session.allFriendsMap[id].online) {
+          $(item).addClass('online');
+        } else {
+          $(item).addClass('offline');
+        }
+      }
+    });
+  },
   buildFriendList: function() {
     // app.session.friends should be available.
     var status = ["accepted", "pending", "requested"];
@@ -166,6 +184,7 @@ app.ui = {
     });
 
     app.ui.setFriendListDragListeners();
+    app.ui.updateKeyItemStatus();
   },
   initFriendSearch: function() {
     $('.search-container input').on('keydown', function(event) {

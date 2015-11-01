@@ -7,6 +7,8 @@ body, html {
 
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 h1, h2, h3, h4, h5, h6, ul {
@@ -198,13 +200,10 @@ button {
 }
 
 .main .online-status {
-  margin: 40px 0 30px;
+  margin: 30px 0 50px;
 }
 
 .main .friend-list-row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -216,12 +215,26 @@ button {
 }
 
 .main .friend-item {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 5;
   padding: 15px 20px 5px 20px;
   border-radius: 5px;
+}
+
+.main .friend-item.online .avatar,
+.main .friend-item.offline .avatar{
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  margin-left: -5px;
+  margin-top: -5px;
+}
+
+.main .friend-item.online .avatar{
+  border: solid 5px #B6EF9B;
+}
+
+.main .friend-item.offline .avatar{
+  border: solid 5px #F79279;
 }
 
 .main .friend-item.ui-state-hover {
@@ -356,9 +369,11 @@ button {
 }
 
 .sidebar ul.friend-status-group.callable li.ui-draggable-dragging {
-  padding: 5px 20px;
+  padding: 15px 25px;
   border-radius: 5px;
-  background: rgba(220, 220, 220, 0.9);
+  font-size: 1em;
+  border: dashed 1px #FFA3A3;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .sidebar ul.friend-status-group li:not(.ui-draggable-dragging):before {
@@ -373,15 +388,15 @@ button {
 }
 
 .sidebar ul.friend-status-group.online li:before {
-  background: #C7EFCF;
+  background: #B6EF9B;
 }
 
 .sidebar ul.friend-status-group.offline li:before {
-  background: #D6D1B1;
+  background: #F79279;
 }
 
 .sidebar ul.friend-status-group.pending li:before {
-  background: #F0B67F
+  background: #F7C88A;
 }
 
 .sidebar ul.friend-status-group li button {
@@ -408,14 +423,14 @@ button {
 }
 
 .sidebar ul.friend-status-group li button.accept-request {
-  background: #70C1B3;
-  border-bottom: solid 4px #60a69a;
+  background: #B6EF9B;
+  border-bottom: solid 4px #99d67c;
   color: #fff;
 }
 
 .sidebar ul.friend-status-group li button.decline-request {
-  background: #F25F5C;
-  border-bottom: solid 4px #d0504d;
+  background: #F79279;
+  border-bottom: solid 4px #df8068;
   color: #fff;
 }
 
