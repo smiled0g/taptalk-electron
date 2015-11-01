@@ -68,18 +68,13 @@ app.socket = {
 
       call.on('close', function() {
         // Unmute my microphone.
-        stream.getAudioTracks()[0].enabled = true;
+        app.session.stream.getAudioTracks()[0].enabled = true;
         console.log('Closed!');
       });
 
       call.on('error', function() {
         console.log('An error occured!');
       });
-
-      if (false) {
-        // End the call.
-        call.close();
-      }
     });
 
     navigator.webkitGetUserMedia (
