@@ -13,10 +13,7 @@ var steps =  [
 
 var current = -1;
 
-
-
 app.tutorial = {
-  
   init: function() {
     // Initialize the tour
     $(window).on('hashchange', function() {
@@ -30,11 +27,13 @@ app.tutorial = {
       $('.tutorial-title').html(steps[current].title);
       $('.tutorial-number').html(current+1);
       if(current == steps.length - 1) {
-        $('.nextbtn').html('Finish'); 
+        $('.nextbtn').html('Finish');
       }
     });
+    // Show overlay
+    $('.tutorial-container').fadeIn();
   },
-  
+
   finish: function() {
     $('.tutorial-container').remove();
   }

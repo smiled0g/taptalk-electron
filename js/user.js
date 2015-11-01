@@ -26,7 +26,7 @@ app.user = {
       },
       function(res) {
         app.session.user = res;
-        app.user.getFriends(callback);
+        app.user.getAllFriends(callback);
       },
       function(err) {
         console.log(err);
@@ -41,13 +41,54 @@ app.user = {
       console.log(res);
     });
   },
+  online: function() {
+
+  },
+  offline: function() {
+
+  },
+  getAllFriends: function(callback) {
+    app.user.getFriends(function(){
+      app.user.getPendingFriends(function(){
+        app.session.allFriends = app.session.friends.concat(app.session.pendingFriends);
+        // Generate all friends map
+        app.session.allFriendsMap = {};
+        app.session.allFriends.map(function(f){
+          app.session.allFriendsMap[f.id] = f;
+        });
+        callback(app.session.allFriends);
+      });
+    });
+  },
   getFriends: function(callback) {
+    // Get accepted + ongoing (requested) friends
     $.get(app.getUrl('/friends'), {}, function(res){
       app.session.friends = res;
       callback(res);
     });
   },
+  getPendingFriends: function(callback) {
+    $.get(app.getUrl('/friends/pending'), {}, function(res){
+      app.session.pendingFriends = res;
+      callback(res);
+    });
+  },
   sendFriendRequest: function(id) {
-    
+    $.postJson(app.getUrl('/friends/request'), { target: id }, function(res){
+      app.ui.updateFriendList();
+    });
+  },
+  acceptFriendRequest: function(id) {
+    app.user.sendFriendRequest(id)
+  },
+  declineFriendRequest: function(id) {
+
+  },
+  setKeyMap: function(keyIndex, id) {
+    app.user.keyMap = app.user.keyMap || {};
+    app.user.keyMap[keyIndex] = id;
+  },
+  getKeyMap: function(keyIndex) {
+    return app.user.keyMap && app.user.keyMap[keyIndex];
   }
 }

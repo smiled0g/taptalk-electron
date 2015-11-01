@@ -15,7 +15,7 @@ app.socket = {
     peer.on('open', function(id) {
       // Open connection to peer server. Report your ID to TapTalk please!
       console.log('My peer ID is: ' + id);
-      app.session.peerId = id;
+      app.session.user.peer = id;
 
       socket.emit('register', {
         token: app.session.user.token,
@@ -23,14 +23,25 @@ app.socket = {
       });
       socket.on('ready', function() {
         console.log('ready naka');
+        $('.online-status input').prop('checked', true);
+        app.ui.updateOnlineStatus();
+        app.socket.updateFriendsOnlineStatus();
       });
       socket.on('status', function(data) {
-        console.log('get a status');
-        console.log(data);
+        // console.log('get a status');
+        // console.log(data);
+        $.extend(true, app.session.allFriendsMap[data.id], data);
+        app.ui.updateFriendList();
       });
       socket.on('query', function(data) {
-        console.log('get a query result');
-        console.log(data);
+        // console.log('get a query result');
+        // console.log(data);
+        // Update online status
+        data.result.map(function(s){
+          app.session.allFriendsMap[s.id].peer = s.peer;
+          app.session.allFriendsMap[s.id].online = true;
+        });
+        app.ui.buildFriendList();
       });
       socket.on('disconnect', function() {
         console.log('disconnect naka');
@@ -41,8 +52,8 @@ app.socket = {
       // Receive a call.
 
       // Mute my microphone.
-      stream.getAudioTracks()[0].enabled = false;
-      call.answer(stream);
+      app.session.stream.getAudioTracks()[0].enabled = false;
+      call.answer(app.session.stream);
 
       call.on('stream', function(_stream) {
         // Append the other end's stream to autoplay.
@@ -75,18 +86,26 @@ app.socket = {
         console.log('Permission denied :(');
       }
     );
-
-    if (false && stream !== null) {
-      // Make a call to some peer ID!
-      // Please some how make sure that I'm not calling someone else nor listening to someone.
-      peer.call('peer-id', app.session.stream);
-    }
   },
-  fetchOnlineStatus: function() {
+
+  updateFriendsOnlineStatus: function() {
     app.session.socket.emit('query');
+  },
+
+  changeOnlineStatus: function(online) {
+    console.log('emit status = '+online);
+    app.session.socket.emit('status', {
+      online: !!online,
+      peer: app.session.user.peer
+    });
+  },
+
+  call: function(id) {
+    app.session.call = app.session.peer.call(app.session.allFriendsMap[id].peer, app.session.stream);
+  },
+
+  hangup: function() {
+    app.session.call.close();
   }
-
-
-
 
 }

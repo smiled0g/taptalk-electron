@@ -14,12 +14,10 @@ var firstTime = true;
 
 app.ui = {
   switchFriendOn: function(index) {
-    $('.friend-item[call-index="'+index+'"]').addClass('active');
-    app.friends.call();
+    $('.friend-item[key-index="'+index+'"]').addClass('active');
   },
   switchFriendOff: function(index) {
-    $('.friend-item[call-index="'+index+'"]').removeClass('active');
-    app.friends.hangup();
+    $('.friend-item[key-index="'+index+'"]').removeClass('active');
   },
   setKeyListeners: function() {
     $(document).on("keydown", function (e) {
@@ -27,6 +25,9 @@ app.ui = {
       if(key && (key.index > 0) && !currentKey) {
         currentKey = key;
         app.ui.switchFriendOn(key.index);
+        app.socket.call(
+          app.user.getKeyMap(key.index)
+        );
       }
     });
     $(document).on("keyup", function (e) {
@@ -34,6 +35,7 @@ app.ui = {
       if(key && (key.index > 0) && (!currentKey || currentKey.index == key.index)) {
         currentKey = null;
         app.ui.switchFriendOff(key.index);
+        app.socket.hangup();
       }
     });
   },
@@ -41,15 +43,22 @@ app.ui = {
     $('.sidebar .friend-status-group.callable .friend-item').draggable({
       helper: "clone"
     });
+  },
+  setFriendListDropListeners: function() {
     $('.main .friend-list .friend-item').droppable({
       hoverClass: "ui-state-hover",
       drop: function(event, ui) {
-        var dropIndex = $(this).attr('call-index');
+        var keyIndex = $(this).attr('key-index');
         var id = $(event.toElement).attr('call-id');
-        console.log(dropIndex, id);
+        app.ui.setKeyItemToFriend(keyIndex, id);
       }
     });
-
+  },
+  setKeyItemToFriend: function(keyIndex, id) {
+    var $key = $('.friend-list .friend-item[key-index="'+keyIndex+'"]');
+    app.user.setKeyMap(keyIndex, id);
+    $key.find('.avatar').css({ backgroundImage: 'url("'+app.session.allFriendsMap[id].display_img+'")' });
+    $key.find('.name').text(app.session.allFriendsMap[id].display_name);
   },
   showRegister: function() {
     $('.login-panel').addClass('register');
@@ -67,13 +76,15 @@ app.ui = {
         display_name = $('.login-panel [name="display-name"]').val().trim();
     app.user.register(username, password, display_name, function(){
       app.ui.initApp();
+      window.location.hash = 'tutorial-1';
+      app.tutorial.init();
     });
   },
   initApp: function() {
     app.ui.setKeyListeners();
-    app.ui.setFriendListDragListeners();
+    app.ui.setFriendListDropListeners();
     app.socket.init();
-    app.ui.buildFriendList();
+    app.ui.updateFriendList();
     app.ui.initFriendSearch();
     $('body').attr('stage', 'app');
     $('.page-container.login-register').css({
@@ -82,15 +93,68 @@ app.ui = {
     setTimeout(function(){
       $('.page-container.login-register').hide();
     }, 2000);
-    if(firstTime) {
-      window.location.hash = 'tutorial-1';
-      app.tutorial.init();
-      //app.tutorial.startTour();
-    }
+    setTimeout(function(){
+      $('.online-status').click();
+    }, 1000);
+  },
+  updateFriendList: function() {
+    app.user.getAllFriends(function() {
+      // app.ui.buildFriendList() will be called automatically via socket.on('query')
+      app.socket.updateFriendsOnlineStatus();
+    });
   },
   buildFriendList: function() {
     // app.session.friends should be available.
-    //
+    var status = ["accepted", "pending", "requested"];
+    var friendList = {};
+    status.map(function(s){
+      friendList[s] = app.session.allFriends.filter(function(f){
+        return f.status === s;
+      });
+    });
+    friendList["online"] = friendList["accepted"].filter(function(f){return f.online;});
+    friendList["offline"] = friendList["accepted"].filter(function(f){return !f.online;});
+    // Populate list
+    // Online
+    $('.friend-list.current-friends > ul.online').find('li').remove();
+    friendList["online"].map(function(f) {
+      $('<li class="friend-item" call-id="'+f.id+'">' +
+          f.display_name +
+        '</li>')
+      .appendTo($('.friend-list.current-friends > ul.online'));
+    });
+    // Offline
+    $('.friend-list.current-friends > ul.offline').find('li').remove();
+    friendList["offline"].map(function(f) {
+      $('<li class="friend-item" call-id="'+f.id+'">' +
+          f.display_name +
+        '</li>')
+      .appendTo($('.friend-list.current-friends > ul.offline'));
+    });
+    // requested
+    $('.friend-list.current-friends > ul.requested').find('li').remove();
+    friendList["requested"].map(function(f) {
+      $('<li class="friend-item">' +
+          f.display_name +
+        '</li>')
+      .appendTo($('.friend-list.current-friends > ul.requested'));
+    });
+    // requested
+    $('.friend-list.current-friends > ul.pending').find('li').remove();
+    friendList["pending"].map(function(f) {
+      $('<li class="friend-item">' +
+          f.display_name +
+          '<button class="decline-request minimal" onclick="app.user.declineFriendRequest('+f.id+')">' +
+            '<i class="ion ion-android-close"></i>' +
+          '</button>' +
+          '<button class="accept-request minimal" onclick="app.user.acceptFriendRequest('+f.id+')">' +
+            '<i class="ion ion-android-done"></i>' +
+          '</button>' +
+        '</li>')
+      .appendTo($('.friend-list.current-friends > ul.pending'));
+    });
+
+    app.ui.setFriendListDragListeners();
   },
   initFriendSearch: function() {
     $('.search-container input').on('keydown', function(event) {
@@ -122,4 +186,8 @@ app.ui = {
         .appendTo($('.friend-list.search-results > ul'));
     });
   },
+  updateOnlineStatus: function() {
+    var status = $('.online-status input').is(':checked');
+    app.socket.changeOnlineStatus(status);
+  }
 };
