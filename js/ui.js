@@ -10,6 +10,8 @@ var keys = {
 
 var currentKey = null;
 
+var firstTime = true;
+
 app.ui = {
   switchFriendOn: function(index) {
     $('.friend-item[call-index="'+index+'"]').addClass('active');
@@ -80,6 +82,11 @@ app.ui = {
     setTimeout(function(){
       $('.page-container.login-register').hide();
     }, 2000);
+    if(firstTime) {
+      window.location.hash = 'tutorial-1';
+      app.tutorial.init();
+      //app.tutorial.startTour();
+    }
   },
   buildFriendList: function() {
     // app.session.friends should be available.

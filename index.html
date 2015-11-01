@@ -34,6 +34,13 @@
     <div class="spacer"></div>
   </div>
   <div class="page-container app">
+    <div class="tutorial-container prominent">
+      <div class="tutorial-bar">
+        <div class="tutorial-number">1</div>
+        <div class="tutorial-title">Find and add your friends to the club!</div>
+      </div>
+      <a href="#tutorial-2"><button class="nextbtn">Next</button></a>
+    </div>
     <div class="main-container">
       <div class="spacer"></div>
       <div class="main">
@@ -50,7 +57,8 @@
           </div>
         </div>
         <ul class="friend-list">
-          <div class="friend-list-row">
+          <div class="friend-list-row prominent" id="tutorial-2">
+            <a href="#tutorial-3" class="prominent-close" title="Click to close this view">close</a>
             <li class="friend-item" call-index="1">
               <div class="avatar-key">
                 <div class="avatar" style="background-image: url('images/swit.jpg')"></div>
@@ -107,9 +115,10 @@
       <div class="spacer"></div>
 
     </div>
-    <nav class="sidebar">
-      <div class="search-container">
+    <nav class="sidebar" >
+      <div class="search-container prominent" id="tutorial-1">
         <input type="text" placeholder="Search friends"/>
+        <a href="#tutorial-2" class="prominent-close" title="Click to close this view">close</a>
       </div>
       <div class="friend-list current-friends">
         <ul class="friend-status-group callable online">
@@ -173,6 +182,7 @@
   <script src="js/user.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/socket.js"></script>
+  <script src="js/tutorial.js"></script>
   <script>
     // Scale-up for demo in Retina display
     require('web-frame').setZoomFactor(1.10);
@@ -198,6 +208,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.14/peer.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js">
+</script>
 </body>
 </html>

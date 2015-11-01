@@ -27,6 +27,9 @@ button {
 }
 
 .page-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
   height: 100%;
   font-family: 'Open Sans';
@@ -35,9 +38,14 @@ button {
 
 /* Login - Register */
 .page-container.login-register {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   background-color: #FFA3A3;
-  transition: 0.5s cubic-bezier(0, 0, 1, 0.03);
+  -webkit-transition: 0.5s cubic-bezier(0, 0, 1, 0.03);
+          transition: 0.5s cubic-bezier(0, 0, 1, 0.03);
 }
 
 .login-panel {
@@ -102,34 +110,46 @@ button {
 }
 
 .login-panel.register .vertical.flip-container .back {
-    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
 }
 
 .login-panel [name="display-name"]{
-  transition: 1s;
-  transform: scaleY(1);
+  -webkit-transition: 1s;
+          transition: 1s;
+  -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+          transform: scaleY(1);
   margin-bottom: 15px;
   display: block;
 }
 
 .login-panel:not(.register) [name="display-name"] {
-  transform: scaleY(0);
+  -webkit-transform: scaleY(0);
+      -ms-transform: scaleY(0);
+          transform: scaleY(0);
   margin-bottom: -40px;
   position: relative;
   display: block;
 }
 
 .login-panel.register .vertical.flip-container .front {
-  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
 }
 
 .login-panel .register-wrapper {
-  transform: scaleY(1);
-  transition: 1s;
+  -webkit-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+          transform: scaleY(1);
+  -webkit-transition: 1s;
+          transition: 1s;
 }
 
 .login-panel.register .register-wrapper {
-  transform: scaleY(0);
+  -webkit-transform: scaleY(0);
+      -ms-transform: scaleY(0);
+          transform: scaleY(0);
   margin-top: -30px;
 }
 
@@ -140,17 +160,33 @@ button {
 }
 
 .main-container {
-  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .spacer {
-  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .main {
-  flex: initial;
+  -webkit-box-flex: initial;
+  -webkit-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
   padding: 0 20px 0 70px;
 }
 
@@ -169,6 +205,9 @@ button {
 }
 
 .main .friend-list-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -180,7 +219,10 @@ button {
 }
 
 .main .friend-item {
-  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 15px 20px 5px 20px;
   border-radius: 5px;
 }
@@ -238,9 +280,19 @@ button {
 /* App Right */
 
 .sidebar {
-  flex: initial;
+  -webkit-box-flex: initial;
+  -webkit-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 300px;
   background: #f7f7f5;
   padding: 20px 25px;
@@ -249,7 +301,10 @@ button {
 .sidebar .search-container {
   position: relative;
   width: 100%;
-  flex: initial;
+  -webkit-box-flex: initial;
+  -webkit-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
   height: 35px;
 }
 
@@ -274,7 +329,10 @@ button {
 
 .sidebar .friend-list {
   overflow: auto;
-  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   padding: 20px;
 }
 
@@ -398,7 +456,8 @@ button {
     display: block;
     width: 200%;
     margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+            transition: margin 0.3s ease-in 0s;
 }
 .slideswitch-inner:before, .slideswitch-inner:after {
     display: block;
@@ -409,8 +468,7 @@ button {
     line-height: 38px;
     font-size: 16px;
     color: white;
-    font-weight: 500;
-    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    font-weight: 500; box-sizing: border-box;
 }
 .slideswitch-inner:before {
     content: "You're online";
@@ -428,9 +486,7 @@ button {
     display: block; width: 22px; height: 22px; margin: 3px;
     background: #FFFFFF;
     border: 2px solid #FFA3A3; border-radius: 7px;
-    position: absolute; top: 6px; bottom: 0; right: 142px;
-    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
-    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+    position: absolute; top: 6px; bottom: 0; right: 142px; -webkit-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
 }
 .slideswitch-checkbox:checked + .slideswitch-label .slideswitch-inner {
     margin-left: 0;
@@ -450,18 +506,25 @@ button {
 }
 
 .flipper {
-	transition: 0.6s;
-	transform-style: preserve-3d;
+	-webkit-transition: 0.6s;
+	        transition: 0.6s;
+	-webkit-transform-style: preserve-3d;
+	        transform-style: preserve-3d;
 
 	position: relative;
 }
 
 .front, .back {
-	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden;
 
-    transition: 0.6s;
-    transform-style: preserve-3d;
-    transform: rotateY(0deg);
+    -webkit-transition: 0.6s;
+
+            transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
 
 	position: absolute;
 	top: 0;
@@ -473,7 +536,8 @@ button {
 }
 
 .back {
-    transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
 }
 
 /* vertical */
@@ -482,21 +546,23 @@ button {
 }
 
 .vertical .back {
-	transform: rotateX(180deg);
+	-webkit-transform: rotateX(180deg);
+	        transform: rotateX(180deg);
 }
 
 .vertical.flip-container .flipper {
 	-webkit-transform-origin: 100% 213.5px;
-	-moz-transform-origin: 100% 213.5px;
 	-ms-transform-origin: 100% 213.5px;
 	transform-origin: 100% 213.5px;
 }
 .vertical.flip-container.hover .back {
-    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
 }
 
 .vertical.flip-container.hover .front {
-    transform: rotateX(180deg);
+    -webkit-transform: rotateX(180deg);
+            transform: rotateX(180deg);
 }
 
 
@@ -527,7 +593,8 @@ button {
   border-radius: 50%;
   border: 3px solid transparent;
   border-top-color: rgba(243, 122, 148, 0.7);
-  animation: spin 3s linear infinite;
+  -webkit-animation: spin 3s linear infinite;
+          animation: spin 3s linear infinite;
 }
 
 .loading:after {
@@ -540,7 +607,22 @@ button {
   border-radius: 50%;
   border: 3px solid transparent;
   border-top-color: rgba(243, 122, 148, 0.9);;
-  animation: spin 1.5s linear infinite;
+  -webkit-animation: spin 1.5s linear infinite;;
+          animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+
+  100% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
@@ -555,4 +637,139 @@ button {
       -ms-transform: rotate(360deg);
       transform: rotate(360deg);
   }
+}
+
+/* Tutorial page
+
+<div class="tutorial-container">
+      <div class="focus-circle"></div>
+      <div class="number">1</div>
+      <div class="title"></div>
+      <button class="nextbtn"></button>
+    </div>
+
+*/
+
+.tutorial-container {
+  position: fixed;
+  background: #f18585;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  z-index: 900 !important;
+}
+
+.tutorial-bar {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 70px;
+  background: rgba(0,0,0,0.4);
+}
+
+.tutorial-number {
+  position: absolute;
+  left: 30px;
+  bottom: 10px;
+  
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.tutorial-title {
+  position: absolute;
+  left: 100px;
+  bottom: 25px;
+  font: 400 36 / 20px 'OpenSans'; 
+  color: #ffffff;
+  z-index: 1001 !important;
+}
+
+.nextbtn {
+  position: absolute;
+  right: 40px;
+  bottom: 18px;
+  background: #ffffff; 
+  z-index: 1001 !important;
+}
+
+.prominent {
+  /*
+  Because the browser will jump to the exact offset-top of the element
+  I added some space at the top to make it look more "centered".
+  */
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .8;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .8;
+  }
+}
+.prominent .prominent-close {
+  display: none;
+}
+.prominent:target {
+  position: relative;
+  z-index: 1000!important;
+  /*padding-top: 50px;
+  margin-bottom: -50px;
+  top: -50px;*/
+}
+.prominent:target > div,
+.prominent:target > nav {
+  box-shadow: 0px 0px 800px 1px rgba(255, 255, 255, 0.4);
+}
+.prominent:target .prominent-close {
+  display: block;
+  position: fixed;
+  text-indent: -100px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+.prominent:target:before {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  content: '';
+  z-index: -1;
+  opacity: .9;
+  -webkit-animation: fadeIn .5s;
+  animation: fadeIn 0.5s;
 }
