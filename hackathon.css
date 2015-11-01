@@ -2,6 +2,7 @@ body, html {
   padding: 0;
   margin: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 * {
@@ -36,6 +37,7 @@ button {
 .page-container.login-register {
   flex-direction: column;
   background-color: #FFA3A3;
+  transition: 0.5s cubic-bezier(0, 0, 1, 0.03);
 }
 
 .login-panel {
@@ -44,6 +46,12 @@ button {
   border-radius: 5px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.login-panel .logo {
+  width: 300px;
+  margin: 0 auto 20px;
+  display: block;
 }
 
 .login-panel input {
@@ -56,8 +64,9 @@ button {
   margin-bottom: 15px;
 }
 
-.login-panel button.login {
+.login-panel button {
   width: 100%;
+  height: 100%;
   font-size: 16px;
   font-weight: bold;
   color: #fff;
@@ -65,13 +74,17 @@ button {
   border-bottom: solid 6px #ec7f7f;
 }
 
-.login-panel button.login:active {
+.login-panel button:active {
   border-bottom: 0;
   margin-top: 6px;
+  height: 42px;
 }
 
-.login-panel .register-wrapper {
-
+.login-panel .flip-container,
+.login-panel .front,
+.login-panel .back {
+  height: 48px;
+  width: 100%;
 }
 
 .login-panel .register {
@@ -88,10 +101,42 @@ button {
   border-bottom: dashed 1px #ec7f7f;
 }
 
+.login-panel.register .vertical.flip-container .back {
+    transform: rotateX(0deg);
+}
+
+.login-panel [name="display-name"]{
+  transition: 1s;
+  transform: scaleY(1);
+  margin-bottom: 15px;
+  display: block;
+}
+
+.login-panel:not(.register) [name="display-name"] {
+  transform: scaleY(0);
+  margin-bottom: -40px;
+  position: relative;
+  display: block;
+}
+
+.login-panel.register .vertical.flip-container .front {
+  transform: rotateX(180deg);
+}
+
+.login-panel .register-wrapper {
+  transform: scaleY(1);
+  transition: 1s;
+}
+
+.login-panel.register .register-wrapper {
+  transform: scaleY(0);
+  margin-top: -30px;
+}
+
 /* App Left */
 
 .page-container.app {
-  display: none;
+
 }
 
 .main-container {
@@ -284,7 +329,7 @@ button {
   background: #F0B67F
 }
 
-.sidebar ul.friend-status-group li i.ion {
+.sidebar ul.friend-status-group li button {
   width: 24px;
   height: 22px;
   background: #e8e8e8;
@@ -293,7 +338,7 @@ button {
   text-align: center;
   font-weight: bold;
   font-size: 12px;
-  line-height: 20px;
+  padding: 0;
   position: relative;
   float: right;
   margin-left: 3px;
@@ -301,22 +346,26 @@ button {
   left: 13px;
 }
 
-.sidebar ul.friend-status-group li i.ion:hover {
+.sidebar ul.friend-status-group li button:active {
   border-bottom: 0 !important;
   bottom: -4px;
   height: 18px;
 }
 
-.sidebar ul.friend-status-group li i.ion.accept {
+.sidebar ul.friend-status-group li button.accept-request {
   background: #70C1B3;
   border-bottom: solid 4px #60a69a;
   color: #fff;
 }
 
-.sidebar ul.friend-status-group li i.ion.decline {
+.sidebar ul.friend-status-group li button.decline-request {
   background: #F25F5C;
   border-bottom: solid 4px #d0504d;
   color: #fff;
+}
+
+.sidebar .search-results {
+  display: none;
 }
 
 /* Utilities */
@@ -388,4 +437,122 @@ button {
 }
 .slideswitch-checkbox:checked + .slideswitch-label .slideswitch-switch {
     right: 8px;
+}
+
+/* Flip Container */
+.flip-container {
+	-webkit-perspective: 1000;
+}
+
+.flip-container, .front, .back {
+	width: 320px;
+	height: 427px;
+}
+
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+.front, .back {
+	backface-visibility: hidden;
+
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.front {
+	z-index: 2;
+}
+
+.back {
+    transform: rotateY(-180deg);
+}
+
+/* vertical */
+.vertical.flip-container {
+	position: relative;
+}
+
+.vertical .back {
+	transform: rotateX(180deg);
+}
+
+.vertical.flip-container .flipper {
+	-webkit-transform-origin: 100% 213.5px;
+	-moz-transform-origin: 100% 213.5px;
+	-ms-transform-origin: 100% 213.5px;
+	transform-origin: 100% 213.5px;
+}
+.vertical.flip-container.hover .back {
+    transform: rotateX(0deg);
+}
+
+.vertical.flip-container.hover .front {
+    transform: rotateX(180deg);
+}
+
+
+/* Loading animation */
+
+.loading {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: rgba(243, 122, 148, 0.8);;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.loading:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: rgba(243, 122, 148, 0.7);
+  animation: spin 3s linear infinite;
+}
+
+.loading:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: rgba(243, 122, 148, 0.9);;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+
+  100% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
 }
