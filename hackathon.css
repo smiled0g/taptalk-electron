@@ -17,11 +17,12 @@ ul {
   padding: 0;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
+input,
+select,
+textarea,
+button {
     outline: none;
+    font-family: 'Open Sans';
 }
 
 .page-container {
@@ -31,7 +32,67 @@ button:focus {
   color: #666;
 }
 
-/* Left */
+/* Login - Register */
+.page-container.login-register {
+  flex-direction: column;
+  background-color: #FFA3A3;
+}
+
+.login-panel {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.login-panel input {
+  background: #fff;
+  border-radius: 7px;
+  padding: 10px 25px;
+  border: 0;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.login-panel button.login {
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #FFA3A3;
+  border-bottom: solid 6px #ec7f7f;
+}
+
+.login-panel button.login:active {
+  border-bottom: 0;
+  margin-top: 6px;
+}
+
+.login-panel .register-wrapper {
+
+}
+
+.login-panel .register {
+  text-align: center;
+  width: 250px;
+  font-size: 14px;
+  color: #ec7f7f;
+  margin: 15px auto 5px;
+  cursor: pointer;
+  border-bottom: solid 1px transparent;
+}
+
+.login-panel .register:hover {
+  border-bottom: dashed 1px #ec7f7f;
+}
+
+/* App Left */
+
+.page-container.app {
+  display: none;
+}
 
 .main-container {
   flex: 1;
@@ -62,6 +123,10 @@ button:focus {
   margin: 40px 0 30px;
 }
 
+.main .friend-list-row {
+  display: flex;
+}
+
 .main .friend-item .avatar-key {
   display: inline-block;
   position: relative;
@@ -70,12 +135,16 @@ button:focus {
 }
 
 .main .friend-item {
-  display: inline-block;
+  flex: 1;
   padding: 15px 20px 5px 20px;
   border-radius: 5px;
 }
 
-.main .friend-item:hover {
+.main .friend-item.ui-state-hover {
+  background: #fafafa;
+}
+
+.main .friend-item.active {
   background: #fafafa;
 }
 
@@ -85,6 +154,10 @@ button:focus {
   height: 50px;
   margin-left: 50px;
   vertical-align: top;
+}
+
+.main .friend-item .name .placeholder {
+  color: #ddd;
 }
 
 .main .friend-item .avatar {
@@ -111,13 +184,13 @@ button:focus {
   left: 13px;
 }
 
-.main .key:hover {
+.main .friend-item.active .key {
   bottom: -4px;
   height: 18px;
   border-bottom: 0;
 }
 
-/* Right */
+/* App Right */
 
 .sidebar {
   flex: initial;
@@ -178,7 +251,17 @@ button:focus {
   margin-bottom: 7px;
 }
 
-.sidebar ul.friend-status-group li:before {
+.sidebar ul.friend-status-group.callable li {
+  cursor: pointer;
+}
+
+.sidebar ul.friend-status-group.callable li.ui-draggable-dragging {
+  padding: 5px 20px;
+  border-radius: 5px;
+  background: rgba(220, 220, 220, 0.9);
+}
+
+.sidebar ul.friend-status-group li:not(.ui-draggable-dragging):before {
   height: 14px;
   width: 14px;
   content: " ";
@@ -288,7 +371,7 @@ button {
 .slideswitch-inner:after {
     content: "You're offline";
     padding-right: 8px;
-    background-color: rgba(255, 163, 163, 0.05); 
+    background-color: rgba(255, 163, 163, 0.05);
     color: #999999;
     text-align: right;
 }

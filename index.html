@@ -2,13 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Joyyak</title>
+  <title>TapTalk</title>
   <link type="text/css" href="hackathon.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
   <link href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div class="page-container">
+  <div class="page-container login-register">
+    <div class="spacer"></div>
+    <div class="login-panel">
+      <input type="text" name="username" placeholder="Username"/>
+      <input type="password" name="password" placeholder="Password"/>
+      <button class="login">Login</button>
+      <div class="register-wrapper">
+        <div class="register">This is your first time? Register here</div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+  <div class="page-container app">
     <div class="main-container">
       <div class="spacer"></div>
       <div class="main">
@@ -25,27 +37,58 @@
           </div>
         </div>
         <ul class="friend-list">
-          <li class="friend-item">
-            <div class="avatar-key">
-              <div class="avatar" style="background-image: url('images/swit.jpg')"></div>
-              <div class="key">A</div>
-            </div>
-            <div class="name">Sorawit Suriyakarn</div>
-          </li>
-          <li class="friend-item">
-            <div class="avatar-key">
-              <div class="avatar" style="background-image: url('images/minions.jpg')"></div>
-              <div class="key">S</div>
-            </div>
-            <div class="name">Minions</div>
-          </li>
-          <li class="friend-item">
-            <div class="avatar-key">
-              <div class="avatar" style="background-image: url('images/grumpy_cat.jpg')"></div>
-              <div class="key">D</div>
-            </div>
-            <div class="name">Grumpy Cat</div>
-          </li>
+          <div class="friend-list-row">
+            <li class="friend-item" call-index="1">
+              <div class="avatar-key">
+                <div class="avatar" style="background-image: url('images/swit.jpg')"></div>
+                <div class="key">A</div>
+              </div>
+              <div class="name">Sorawit Suriyakarn</div>
+            </li>
+            <li class="friend-item" call-index="2">
+              <div class="avatar-key">
+                <div class="avatar" style="background-image: url('images/minions.jpg')"></div>
+                <div class="key">S</div>
+              </div>
+              <div class="name">Minions</div>
+            </li>
+            <li class="friend-item" call-index="3">
+              <div class="avatar-key">
+                <div class="avatar" style="background-image: url('images/grumpy_cat.jpg')"></div>
+                <div class="key">D</div>
+              </div>
+              <div class="name">Grumpy Cat</div>
+            </li>
+          </div>
+          <div class="friend-list-row">
+            <li class="friend-item" call-index="4">
+              <div class="avatar-key">
+                <div class="avatar" style="background-image: url('images/avatar.png')"></div>
+                <div class="key">Z</div>
+              </div>
+              <div class="name">
+                <div class="placeholder">Drag contact here</div>
+              </div>
+            </li>
+            <li class="friend-item" call-index="5">
+              <div class="avatar-key">
+                <div class="avatar" style="background-image: url('images/avatar.png')"></div>
+                <div class="key">X</div>
+              </div>
+              <div class="name">
+                <div class="placeholder">Drag contact here</div>
+              </div>
+            </li>
+            <li class="friend-item" call-index="6">
+              <div class="avatar-key">
+                <div class="avatar" style="background-image: url('images/avatar.png')"></div>
+                <div class="key">C</div>
+              </div>
+              <div class="name">
+                <div class="placeholder">Drag contact here</div>
+              </div>
+            </li>
+          </div>
         </ul>
       </div>
       <div class="spacer"></div>
@@ -56,21 +99,21 @@
         <input type="text" placeholder="Search friends"/>
       </div>
       <div class="friend-list">
-        <ul class="friend-status-group online">
+        <ul class="friend-status-group callable online">
           <h3>Online</h3>
-          <li class="friend-item">
+          <li class="friend-item" call-id="1">
             Gott Phusit
           </li>
-          <li class="friend-item">
+          <li class="friend-item" call-id="2">
             Gitt Phusot
           </li>
         </ul>
-        <ul class="friend-status-group offline">
+        <ul class="friend-status-group callable offline">
           <h3>Offline</h3>
-          <li class="friend-item">
+          <li class="friend-item" call-id="3">
             Gitt Phusot
           </li>
-          <li class="friend-item">
+          <li class="friend-item" call-id="4">
             Gott Phusit
           </li>
         </ul>
@@ -100,9 +143,18 @@
     </nav>
   </div>
 
+  <script src="app.js"></script>
+  <script src="js/user.js"></script>
+  <script src="js/ui.js"></script>
   <script>
     // Scale-up for demo in Retina display
     require('web-frame').setZoomFactor(1.10);
+
+    // Set global jQuery
+    window.$ = window.jQuery = require('jquery');
+    require('jquery-ui');
+
+
   </script>
 </body>
 </html>
