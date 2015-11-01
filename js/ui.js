@@ -22,6 +22,7 @@ app.ui = {
   setKeyListeners: function() {
     $(document).on("keydown", function (e) {
       var key = keys[e.which];
+      if(key === undefined) return;
       var id = app.user.getKeyMap(key.index);
       if(id && app.session.allFriendsMap[id].online) {
         if(key && (key.index > 0) && !currentKey) {
@@ -207,7 +208,7 @@ app.ui = {
     $('.friend-list.current-friends').hide();
     $('.friend-list.search-results').show().find('ul > li').remove();
     results.map(function(r){
-      $('<li class="friend-item" user-id="'+r.id+'">' +
+      $('<li class="friend-item'+(app.session.speaking[r.id]?' speaking':'')+'" user-id="'+r.id+'">' +
           r.display_name +
           '<button class="send-request minimal" onclick="app.user.sendFriendRequest('+r.id+');$(this).parent().remove()">' +
             '<i class="ion ion-ios-plus-empty"></i>' +
@@ -219,5 +220,21 @@ app.ui = {
   updateOnlineStatus: function() {
     var status = $('.online-status input').is(':checked');
     app.socket.changeOnlineStatus(status);
+  },
+  callStream: function(call) {
+    var caller = app.session.allFriends.filter(function(f){ return f.peer === call.peer });
+    if(caller) {
+      // Show speaker
+      app.session.speaking[caller[0].id] = true;
+      $('.friend-item[call-id="'+caller[0].id+'"]').addClass('speaking');
+    }
+  },
+  callDone: function(call) {
+    var caller = app.session.allFriends.filter(function(f){ return f.peer === call.peer });
+    if(caller) {
+      // Hide speaker
+      app.session.speaking[caller[0].id] = false;
+      $('.friend-item[call-id="'+caller[0].id+'"]').removeClass('speaking');
+    }
   }
 };

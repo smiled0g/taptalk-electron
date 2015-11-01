@@ -364,6 +364,15 @@ button {
   margin-bottom: 7px;
 }
 
+.sidebar ul.friend-status-group li:not(.ui-draggable-dragging).friend-item.speaking:after {
+  font-family: "Ionicons";
+  content: "\f257";
+  position: absolute;
+  font-size: 16px;
+  right: 0;
+  top: 0;
+}
+
 .sidebar ul.friend-status-group.callable li {
   cursor: pointer;
 }

@@ -2,7 +2,9 @@ var app = {
   user: {},
   ui: {},
   socket: {},
-  session: {},
+  session: {
+    speaking: {}
+  },
   getUrl: function(path) {
     return 'https://joyyak.com' + path;
   }

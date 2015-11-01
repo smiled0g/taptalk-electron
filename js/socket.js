@@ -64,12 +64,14 @@ app.socket = {
         // Append the other end's stream to autoplay.
         var audio = $('<audio autoplay />').appendTo('body');
         audio[0].src = (URL || webkitURL || mozURL).createObjectURL(_stream);
+        app.ui.callStream(call);
       });
 
       call.on('close', function() {
         // Unmute my microphone.
         app.session.stream.getAudioTracks()[0].enabled = true;
         console.log('Closed!');
+        app.ui.callDone(call);
       });
 
       call.on('error', function() {
